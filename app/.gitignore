@@ -1,0 +1,23 @@
+# Entorno virtual
+venv/
+
+# Variables de entorno (¡Crítico para seguridad!)
+.env
+
+# Archivos compilados y caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caché de pruebas (pytest)
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Bases de datos locales (Recomendado si usas SQLite con SQLAlchemy/Alembic)
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuraciones de editores (VS Code)
+.vscode/

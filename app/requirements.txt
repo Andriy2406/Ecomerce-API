@@ -1,0 +1,10 @@
+#Todo descargarlo directamente desde .\app\
+
+python-jose[cryptography]
+pip install "bcrypt<4.0.0"
+email-validator
+python-multipart
+python-dotenv
+pydantic-settings
+alembic
+pytest httpx

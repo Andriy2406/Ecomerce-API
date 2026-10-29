@@ -1,0 +1,47 @@
+from fastapi.security import OAuth2PasswordBearer
+from fastapi import Depends, HTTPException, status
+from jose import JWTError
+from sqlalchemy.orm import session
+from db.database import SessionLocal
+from core.security import verificar_token
+from crud import usuario
+
+
+oauh2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
+
+def get_db():
+    db = SessionLocal()
+    try: 
+        yield db
+    finally:
+        db.close()
+
+def get_current_user(
+        token: str = Depends(oauh2_scheme),
+        db:session = Depends(get_db)
+):
+    cred_exc = HTTPException(
+        status_code= status.HTTP_401_UNAUTHORIZED,
+        detail="No autenticado",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    try:
+        payload = verificar_token(token)
+        email: str | None = payload.get("sub")
+        if email is None:
+            raise cred_exc
+    except JWTError:
+        raise cred_exc
+
+    user = usuario.obtener_usuarios_por_email(db, email)
+    if user is None:
+        raise cred_exc
+    return user
+
+
+def requiere_admin(current_user = Depends(get_current_user)):
+    if not current_user.es_admin:
+        raise HTTPException(status_code=403, detail="No autorizado: se requiere rol admin")
+
+    
