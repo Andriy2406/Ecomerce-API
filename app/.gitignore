@@ -1,23 +1,40 @@
-# Entorno virtual
-venv/
-
-# Variables de entorno (¡Crítico para seguridad!)
+# -----------------------------
+# Variables de entorno (Seguridad)
+# -----------------------------
 .env
 
-# Archivos compilados y caché de Python
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Caché de pruebas (pytest)
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Bases de datos locales (Recomendado si usas SQLite con SQLAlchemy/Alembic)
+# -----------------------------
+# Base de datos
+# -----------------------------
+db/
 *.db
 *.sqlite
 *.sqlite3
 
-# Configuraciones de editores (VS Code)
+# -----------------------------
+# Entornos virtuales
+# -----------------------------
+venv/
+.venv/
+env/
+
+# -----------------------------
+# Caché y archivos compilados
+# -----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# -----------------------------
+# Pruebas (Testing)
+# -----------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+
+# -----------------------------
+# Configuraciones de editores
+# -----------------------------
 .vscode/
+.idea/
+*.swp
